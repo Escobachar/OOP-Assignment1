@@ -3,18 +3,26 @@ public class Rational implements Scalar {
     private int denominator;
 
     public Rational(Double value){
-        int numerator;
-        int denominator;
-        String strValue = value.toString();
-        int pointLoc = strValue.indexOf(".");
-        numerator = Integer.parseInt(strValue.substring(0, pointLoc));
-        denominator = Integer.parseInt(strValue.substring(pointLoc+1));
-        for(int i = pointLoc; i< strValue.length(); i++){
-            numerator*=10;
-            denominator*=10;
-        }
-        this.numerator = numerator;
-        this.denominator = denominator;
+       String strValue = value.toString();
+       int digitsDec = strValue.length() - 1 - strValue.indexOf('.');        
+
+
+       int denominator = 1;
+       for(int i = 0; i < digitsDec; i++){
+           value *= 10;
+           denominator *= 10;
+       }
+       int numerator = (int) Math.round(value);
+
+       this.numerator = numerator;
+       this.denominator = denominator;
+    }
+    public Rational(int numerator, int denominator){
+       if(denominator == 0){
+              throw new IllegalArgumentException("The denomitor can't be 0!");
+       }
+       this.numerator = numerator;
+       this.denominator = denominator;
     }
 
 	@Override
@@ -26,27 +34,33 @@ public class Rational implements Scalar {
 
 	@Override
 	public Scalar mul(Scalar s) {
-       return null;
+              double result = this.getValue() * s.getValue();
+              return new Rational(result);
 	}
 
 	@Override
 	public Scalar neg() {
-       return null;
+              int newNumerator = this.numerator *= -1;
+              return new Rational(newNumerator, this.denominator);
 	}
 
 	@Override
 	public Scalar power(int exponent) {
-       return null;
+              int newNumerator = (int)Math.pow(numerator, exponent);
+              int newDenomerator = (int)Math.pow(denominator, exponent);
+              return new Rational(newNumerator, newDenomerator);
 	}
 
 	@Override
 	public int sign() {
-       return -1;
+              if((numerator < 0 && denominator > 0) || (numerator > 0 && denominator < 0))
+                     return -1;
+              return 1;
 	}
 
 	@Override
 	public double getValue() {
-       return (this.numerator/this.denominator);
+       return (this.numerator/(double)this.denominator);
 	}
     
 }
