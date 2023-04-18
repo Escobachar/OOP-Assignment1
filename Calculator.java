@@ -69,9 +69,10 @@ public class Calculator {
     }
     public static void main(String[] args){
         Calculator c = new Calculator();
-        Scalar test1 = new IntegerScalar(5);
-        Scalar test2 = new IntegerScalar(5);
-        System.out.println(test1.add(test2).getValue());
+        Scalar test1 = new Rational(-5.0);
+        Scalar test2 = new Rational(4.5);
+        Scalar test3 = (test1.mul(test2)).power(3);
+        System.out.println((test1.mul(test2)).power(3).getValue());
         int i = 4;
         //c.start();
     }
