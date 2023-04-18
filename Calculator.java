@@ -69,7 +69,7 @@ public class Calculator {
     }
     public static void main(String[] args){
         Calculator c = new Calculator();
-        int i = 5;
-        c.start();s
+        int i = 4;
+        c.start();
     }
 }
