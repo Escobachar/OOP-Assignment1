@@ -53,14 +53,44 @@ public class Rational implements Scalar {
 
 	@Override
 	public int sign() {
+              if (numerator == 0) return 0;
               if((numerator < 0 && denominator > 0) || (numerator > 0 && denominator < 0))
                      return -1;
               return 1;
 	}
+       @Override
+       public boolean equals(Object o){ 
+              if(o instanceof Scalar){
+                     return ((Scalar)o).getValue() == this.getValue();
+              }
+              return false;
+       }
 
 	@Override
 	public double getValue() {
        return (this.numerator/(double)this.denominator);
 	}
+
+       @Override
+       public String toString(){
+              Rational reduced = this.reduce();
+              if(reduced.denominator == 1) return Integer.toString(reduced.numerator);
+              return Integer.toString(reduced.numerator)+"/"+Integer.toString(reduced.denominator);
+       }
+       
+       public Rational reduce(){ 
+              int dividor = 2;
+              int min = Math.min(Math.abs(numerator), Math.abs(denominator));
+              int num = numerator;
+              int denum = denominator;
+              while(dividor <= min){
+                     while(num%dividor == 0 && denum%dividor == 0){
+                            num /= dividor;
+                            denum /= dividor;
+                     }
+                     dividor++;
+              }
+              return new Rational(num, denum);
+       }
     
 }

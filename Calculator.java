@@ -70,9 +70,13 @@ public class Calculator {
     public static void main(String[] args){
         Calculator c = new Calculator();
         Scalar test1 = new Rational(-5.0);
-        Scalar test2 = new Rational(4.5);
+        Rational test2 = new Rational(4.5);
+        Rational test5 = new Rational(4.0);
         Scalar test3 = (test1.mul(test2)).power(3);
-        System.out.println((test1.mul(test2)).power(3).getValue());
+        Scalar test4 = test2.reduce();
+        test5 = test5.reduce();
+        System.out.println(test2.toString());
+        System.out.println(test1.toString());
         int i = 4;
         //c.start();
     }
