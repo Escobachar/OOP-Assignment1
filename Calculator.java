@@ -53,7 +53,7 @@ public class Calculator {
                     System.out.println("The result is:");
                     System.out.println(p1.derivative());
                 }
-                case 5 -> System.out.println("Goodbye!");
+                case 5 -> Sstem.out.println("Goodbye!");
                 default -> System.out.println("Invalid choice, please try again.");
             }
         }
@@ -69,6 +69,7 @@ public class Calculator {
     }
     public static void main(String[] args){
         Calculator c = new Calculator();
-        c.start();
+        int i = 5;
+        c.start();s
     }
 }
