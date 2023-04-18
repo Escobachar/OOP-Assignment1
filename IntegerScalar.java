@@ -56,8 +56,8 @@ public class IntegerScalar implements Scalar{
 
     @Override
     public boolean equals(Object o){
-        if(o instanceof IntegerScalar){
-            return ((IntegerScalar) o).getValue() == this.number;
+        if(o instanceof Scalar){
+            return ((Scalar) o).getValue() == this.number;
         }
         else{
             return false;

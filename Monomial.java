@@ -31,10 +31,27 @@ public class Monomial {
     @Override
     public boolean equals(Object o){
         if(o instanceof Monomial){
-            return this.coefficient == ((Monomial) o).coefficient & this.exponent == ((Monomial) o).exponent;
+            return this.coefficient.equals(((Monomial) o).coefficient) & this.exponent == ((Monomial) o).exponent;
         }
         else{
             return false;
+        }
+    }
+    @Override
+    public String toString(){
+        if(this.coefficient.getValue() == 0){
+            return "0";
+        }
+        else if(this.exponent!=0) {
+            if (this.coefficient.getValue() != 1) {
+                return this.coefficient.toString() + "x^" + this.exponent;
+            }
+            else {
+                return "x^" + this.exponent;
+            }
+        }
+        else{
+            return this.coefficient.toString();
         }
     }
 }
