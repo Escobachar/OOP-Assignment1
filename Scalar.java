@@ -5,4 +5,5 @@ public interface Scalar {
      Scalar power(int exponent);
      int sign();
      boolean equals(Object o);
+     double getValue();
 }
