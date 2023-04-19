@@ -5,21 +5,26 @@ public class Rational implements Scalar {
     public Rational(Double value){
        String strValue = value.toString();
        int digitsDec = strValue.length() - 1 - strValue.indexOf('.');        
-
-
        int denominator = 1;
        for(int i = 0; i < digitsDec; i++){
            value *= 10;
            denominator *= 10;
        }
        int numerator = (int) Math.round(value);
-
+       if(numerator < 0 && denominator < 0){
+              numerator *= -1;
+              denominator *= -1;
+       }
        this.numerator = numerator;
        this.denominator = denominator;
     }
     public Rational(int numerator, int denominator){
        if(denominator == 0){
               throw new IllegalArgumentException("The denomitor can't be 0!");
+       }
+       if(numerator < 0 && denominator < 0){
+              numerator *= -1;
+              denominator *= -1;
        }
        this.numerator = numerator;
        this.denominator = denominator;
