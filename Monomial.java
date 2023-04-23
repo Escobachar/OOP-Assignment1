@@ -41,19 +41,19 @@ public class Monomial {
     @Override
     public String toString(){
         if(this.coefficient.getValue() == 0){
-            return "0";
+            return "";
         }
         else if(this.exponent!=0) {
             if (this.coefficient.getValue() != 1) {
+                if(this.exponent == 1)
+                    return this.coefficient.toString() + "x";
                 return this.coefficient.toString() + "x^" + this.exponent;
             }
-            else {
-                return "x^" + this.exponent;
-            }
+            return "x^" + this.exponent;
+            
         }
-        else{
-            return this.coefficient.toString();
-        }
+        return this.coefficient.toString();
+        
     }
     public int getExponent(){
         return this.exponent;

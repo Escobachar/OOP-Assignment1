@@ -40,7 +40,23 @@ public class Polynomial {
     }
     
     public static Polynomial build(String input){
-        return null;
+        String[] ms = input.split(" ");
+        Set<Monomial> monos = new HashSet<Monomial>();
+        Scalar currentScalar;
+        for(int i=0; i<ms.length; i++){
+            if(ms[i].indexOf('/') != -1){
+                String[] divided = ms[i].split("/");
+                int numerator = Integer.parseInt(divided[0]);
+                int denomerator = Integer.parseInt(divided[1]);
+                currentScalar = new Rational(numerator, denomerator);
+                monos.add(new Monomial(i, currentScalar));
+            }
+            else{
+                currentScalar = new IntegerScalar(Integer.parseInt(ms[i]));
+                monos.add(new Monomial(i, currentScalar));
+            }
+        }
+        return new Polynomial(monos);
     }
     
     public Polynomial add(Polynomial p){
@@ -100,13 +116,12 @@ public class Polynomial {
     @Override
     public String toString(){
         String result = "";
-
-        for(Monomial mono: monomials.descendingMap().values()){
+        for(Monomial mono: monomials.values()){
             result += mono.toString()+"+";
         }
         result = result.replace("-+", "-");
         result = result.replace("+-", "-");
-
+        result = result.replace("++", "");
         if(result.charAt(0) == '+')
             result = result.substring(1);
         if(result.charAt(result.length()-1) == '+')

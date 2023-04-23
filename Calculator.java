@@ -84,10 +84,12 @@ public class Calculator {
         monos.add(mono2);
         Set<Monomial> monos2 = new HashSet<Monomial>();
         monos2.add(mono3);
-        Polynomial poli2 = new Polynomial(monos2);
-        Polynomial poli1 = new Polynomial(monos);
-        Polynomial d = poli1.derivative();
-        System.out.println(poli1.toString());
+        Polynomial poly2 = new Polynomial(monos2);
+        Polynomial poly1 = new Polynomial(monos);
+        Polynomial d = poly1.derivative();
+        System.out.println(poly1.toString());
+        Polynomial poly3 = Polynomial.build("0 0 0 0 0 0 1");
+        System.out.println(poly3.toString());
         int i = 4;
         //c.start();
     }
