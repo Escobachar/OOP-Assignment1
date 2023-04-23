@@ -1,4 +1,6 @@
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Calculator {
     private final Scanner s;
@@ -74,9 +76,18 @@ public class Calculator {
         Rational test5 = new Rational(4.0);
         Scalar test3 = (test1.mul(test2)).power(3);
         Scalar test4 = test2.reduce();
-        test5 = test5.reduce();
-        System.out.println(test2.toString());
-        System.out.println(test1.toString());
+        Monomial mono1 = new Monomial(2, test4);
+        Monomial mono2 = new Monomial(1, test1);
+        Monomial mono3 = new Monomial(0, test5);
+        Set<Monomial> monos = new HashSet<Monomial>();
+        monos.add(mono1);
+        monos.add(mono2);
+        Set<Monomial> monos2 = new HashSet<Monomial>();
+        monos2.add(mono3);
+        Polynomial poli2 = new Polynomial(monos2);
+        Polynomial poli1 = new Polynomial(monos);
+        Polynomial d = poli1.derivative();
+        System.out.println(poli1.toString());
         int i = 4;
         //c.start();
     }

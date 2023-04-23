@@ -67,6 +67,5 @@ public class IntegerScalar implements Scalar{
     public String toString(){
         return String.valueOf(number);
     }
-    
 
 }

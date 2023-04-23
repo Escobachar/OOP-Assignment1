@@ -1,6 +1,7 @@
 public class Monomial {
     private int exponent;
     private Scalar coefficient;
+
     public Monomial(int exponent, Scalar coefficient){
         this.exponent=exponent;
         this.coefficient=coefficient;
@@ -53,5 +54,8 @@ public class Monomial {
         else{
             return this.coefficient.toString();
         }
+    }
+    public int getExponent(){
+        return this.exponent;
     }
 }
