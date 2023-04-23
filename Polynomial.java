@@ -1,9 +1,5 @@
-import java.security.KeyStore.Entry;
-import java.util.AbstractMap;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -11,7 +7,7 @@ import java.util.TreeMap;
 public class Polynomial {
     private TreeMap<Integer,Monomial> monomials;
 
-    public Polynomial(Set<Monomial> monos){
+    public Polynomial(Collection<Monomial> monos){
         TreeMap<Integer, Monomial> monoMap = new TreeMap<Integer, Monomial>();
         this.monomials = monoMap;
         for(Monomial node: monos){
@@ -25,7 +21,7 @@ public class Polynomial {
             }
         }
     }
-    public Polynomial(Set<Monomial> monos1, Set<Monomial> monos2){
+    public Polynomial(Collection<Monomial> monos1, Collection<Monomial> monos2){
         TreeMap<Integer, Monomial> monoMap = new TreeMap<Integer, Monomial>();
         this.monomials = monoMap;
         for (Monomial i : monos1) {
@@ -60,13 +56,13 @@ public class Polynomial {
     }
     
     public Polynomial add(Polynomial p){
-        Set<Monomial> nodes = p.getSet();
-        return new Polynomial(nodes, getSet());
+        Collection<Monomial> nodes = p.getCollection();
+        return new Polynomial(nodes, getCollection());
     
     }
 
     public Polynomial mul(Polynomial p){
-        Set<Monomial> nodes = p.getSet();
+        Collection<Monomial> nodes = p.getCollection();
         for (Monomial node : nodes) {
             Monomial mono;
             if(monomials.containsKey(node.getExponent())){
@@ -94,8 +90,8 @@ public class Polynomial {
     } 
 
     public Polynomial derivative(){
-        Set<Monomial> nodes = getSet();
-        Set<Monomial> newSet = new HashSet<Monomial> ();
+        Collection<Monomial> nodes = getCollection();
+        Collection<Monomial> newSet = new HashSet<Monomial> ();
         for (Monomial node : nodes) {
             if(node.getExponent() == 0){
                 continue;
@@ -129,7 +125,7 @@ public class Polynomial {
         return result;
     }
 
-    public Set<Monomial> getSet(){
+    public Collection<Monomial> getCollection(){
         Set<Monomial> hSet = new HashSet<Monomial>();
         for (Map.Entry<Integer, Monomial> mono : monomials.entrySet()) {
             hSet.add(mono.getValue());

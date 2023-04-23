@@ -88,7 +88,7 @@ public class Calculator {
         Polynomial poly1 = new Polynomial(monos);
         Polynomial d = poly1.derivative();
         System.out.println(poly1.toString());
-        Polynomial poly3 = Polynomial.build("0 0 0 0 0 0 1");
+        Polynomial poly3 = Polynomial.build("0 0 0 0 0 1/2 1");
         System.out.println(poly3.toString());
         int i = 4;
         //c.start();
