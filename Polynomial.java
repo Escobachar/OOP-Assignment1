@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
@@ -8,6 +9,14 @@ public class Polynomial {
     private TreeMap<Integer,Monomial> monomials;
 
     public Polynomial(Collection<Monomial> monos){
+        createTreeMap(monos);
+    }
+    public Polynomial(Collection<Monomial> monos1, Collection<Monomial> monos2){
+        monos1.addAll(monos2);
+        createTreeMap(monos1);
+        
+    }
+    private void createTreeMap(Collection<Monomial> monos){
         TreeMap<Integer, Monomial> monoMap = new TreeMap<Integer, Monomial>();
         this.monomials = monoMap;
         for(Monomial node: monos){
@@ -20,19 +29,7 @@ public class Polynomial {
                 monomials.put(exp, monomials.get(exp).add(mono));
             }
         }
-    }
-    public Polynomial(Collection<Monomial> monos1, Collection<Monomial> monos2){
-        TreeMap<Integer, Monomial> monoMap = new TreeMap<Integer, Monomial>();
-        this.monomials = monoMap;
-        for (Monomial i : monos1) {
-            for(Monomial x : monos2){
-                if(i.equals(x)){
-                    i = i.add(x);
-                }
-            }
-            monomials.put(i.getExponent(), i);
-        }
-        
+
     }
     
     public static Polynomial build(String input){
