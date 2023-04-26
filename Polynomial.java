@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
@@ -11,11 +11,13 @@ public class Polynomial {
     public Polynomial(Collection<Monomial> monos){
         createTreeMap(monos);
     }
+
     public Polynomial(Collection<Monomial> monos1, Collection<Monomial> monos2){
         monos1.addAll(monos2);
         createTreeMap(monos1);
         
     }
+
     private void createTreeMap(Collection<Monomial> monos){
         TreeMap<Integer, Monomial> monoMap = new TreeMap<Integer, Monomial>();
         this.monomials = monoMap;
@@ -59,20 +61,15 @@ public class Polynomial {
     }
 
     public Polynomial mul(Polynomial p){
+        Collection<Monomial> monos = monomials.values();
         Collection<Monomial> nodes = p.getCollection();
-        for (Monomial node : nodes) {
-            Monomial mono;
-            if(monomials.containsKey(node.getExponent())){
-
-                mono = monomials.remove(node.getExponent()).mul(node);
-
-            }
-            else{
-                mono = node;
-            }
-            monomials.put(mono.getExponent(), mono);
+        Collection<Monomial> result = new ArrayList<Monomial>();
+        for(Monomial node : nodes) {
+            for(Monomial mono : monos){
+                result.add(node.mul(mono));
+            }    
         }
-        return this;
+        return new Polynomial(result);
     }
 
     public Scalar evaluate(Scalar s){

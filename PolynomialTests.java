@@ -1,12 +1,9 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 import org.junit.Test;
 
@@ -26,11 +23,19 @@ public class PolynomialTests {
     @Test
     public void createPolynomial(){
         assertEquals(p1, new Polynomial(monos2, monos3));
-
-
     }
 
-
-
+    @Test
+    public void buildTest(){
+        String s = "0 1 1 1 1";
+        assertEquals(Polynomial.build(s).toString(), p1.toString());
+    }
     
+    @Test
+    public void addTest(){
+        assertEquals(p1, p2.add(p3));
+        assertEquals(p1, p3.add(p2));
+        assertEquals(p1.add(p2), p2.add(p3).add(p2));
+    }
+
 }
