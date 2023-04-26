@@ -18,19 +18,20 @@ public class Rational implements Scalar {
        this.numerator = numerator;
        this.denominator = denominator;
        this.reduce();
-    }
-    public Rational(int numerator, int denominator){
-       if(denominator == 0){
-              throw new IllegalArgumentException("The denomitor can't be 0!");
        }
-       if((numerator < 0 && denominator < 0) || (numerator >= 0 && denominator < 0)){
-              numerator *= -1;
-              denominator *= -1;
+
+       public Rational(int numerator, int denominator){
+              if(denominator == 0){
+                     throw new IllegalArgumentException("The denomitor can't be 0!");
+              }
+              if((numerator < 0 && denominator < 0) || (numerator >= 0 && denominator < 0)){
+                     numerator *= -1;
+                     denominator *= -1;
+              }
+              
+              this.numerator = numerator;
+              this.denominator = denominator;
        }
-       
-       this.numerator = numerator;
-       this.denominator = denominator;
-    }
 
 	@Override
 	public Scalar add(Scalar s) {
