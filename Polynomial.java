@@ -47,6 +47,8 @@ public class Polynomial {
                 monos.add(new Monomial(i, currentScalar));
             }
             else{
+                if(ms[i].equals("0"))
+                    continue;
                 currentScalar = new IntegerScalar(Integer.parseInt(ms[i]));
                 monos.add(new Monomial(i, currentScalar));
             }
@@ -119,7 +121,7 @@ public class Polynomial {
         return result;
     }
 
-    public Collection<Monomial> getCollection(){
+    private Collection<Monomial> getCollection(){
         Set<Monomial> hSet = new HashSet<Monomial>();
         for (Map.Entry<Integer, Monomial> mono : monomials.entrySet()) {
             hSet.add(mono.getValue());
