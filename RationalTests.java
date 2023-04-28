@@ -1,7 +1,6 @@
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
-
+import static org.junit.Assert.assertThrows;
 import org.junit.Test;
 
 public class RationalTests {
@@ -31,7 +30,7 @@ public class RationalTests {
         assertEquals(r6, r5);
         assertThrows(IllegalArgumentException.class,()->{
             new Rational(1, 0);
-        } );   
+        } );
     }
     @Test
     public void addTest(){
