@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
@@ -8,6 +9,16 @@ public class Polynomial {
     private TreeMap<Integer,Monomial> monomials;
 
     public Polynomial(Collection<Monomial> monos){
+        createTreeMap(monos);
+    }
+
+    public Polynomial(Collection<Monomial> monos1, Collection<Monomial> monos2){
+        monos1.addAll(monos2);
+        createTreeMap(monos1);
+        
+    }
+
+    private void createTreeMap(Collection<Monomial> monos){
         TreeMap<Integer, Monomial> monoMap = new TreeMap<Integer, Monomial>();
         this.monomials = monoMap;
         for(Monomial node: monos){
@@ -20,19 +31,7 @@ public class Polynomial {
                 monomials.put(exp, monomials.get(exp).add(mono));
             }
         }
-    }
-    public Polynomial(Collection<Monomial> monos1, Collection<Monomial> monos2){
-        TreeMap<Integer, Monomial> monoMap = new TreeMap<Integer, Monomial>();
-        this.monomials = monoMap;
-        for (Monomial i : monos1) {
-            for(Monomial x : monos2){
-                if(i.equals(x)){
-                    i = i.add(x);
-                }
-            }
-            monomials.put(i.getExponent(), i);
-        }
-        
+
     }
     
     public static Polynomial build(String input){
@@ -48,6 +47,8 @@ public class Polynomial {
                 monos.add(new Monomial(i, currentScalar));
             }
             else{
+                if(ms[i].equals("0"))
+                    continue;
                 currentScalar = new IntegerScalar(Integer.parseInt(ms[i]));
                 monos.add(new Monomial(i, currentScalar));
             }
@@ -62,20 +63,15 @@ public class Polynomial {
     }
 
     public Polynomial mul(Polynomial p){
+        Collection<Monomial> monos = monomials.values();
         Collection<Monomial> nodes = p.getCollection();
-        for (Monomial node : nodes) {
-            Monomial mono;
-            if(monomials.containsKey(node.getExponent())){
-
-                mono = monomials.remove(node.getExponent()).mul(node);
-
-            }
-            else{
-                mono = node;
-            }
-            monomials.put(mono.getExponent(), mono);
+        Collection<Monomial> result = new ArrayList<Monomial>();
+        for(Monomial node : nodes) {
+            for(Monomial mono : monos){
+                result.add(node.mul(mono));
+            }    
         }
-        return this;
+        return new Polynomial(result);
     }
 
     public Scalar evaluate(Scalar s){
@@ -125,7 +121,7 @@ public class Polynomial {
         return result;
     }
 
-    public Collection<Monomial> getCollection(){
+    private Collection<Monomial> getCollection(){
         Set<Monomial> hSet = new HashSet<Monomial>();
         for (Map.Entry<Integer, Monomial> mono : monomials.entrySet()) {
             hSet.add(mono.getValue());

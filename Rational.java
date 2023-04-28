@@ -48,7 +48,7 @@ public class Rational implements Scalar {
 
 	@Override
 	public Scalar neg() {
-              int newNumerator = this.numerator *= -1;
+              int newNumerator = this.numerator * -1;
               return new Rational(newNumerator, this.denominator);
 	}
 

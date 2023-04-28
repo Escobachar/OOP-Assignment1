@@ -6,9 +6,7 @@ public class Monomial {
         this.exponent=exponent;
         this.coefficient=coefficient;
     }
-    private boolean isInteger(Scalar s){
-        return (int)s.getValue() == s.getValue();
-    }
+    
     public Monomial add(Monomial m){
         if(m.exponent!=this.exponent){
             return null;
